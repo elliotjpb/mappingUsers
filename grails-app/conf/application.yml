@@ -137,21 +137,22 @@ environments:
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
 
 
-bpdts-test-app:
-    url: https://bpdts-test-app.herokuapp.com/
-    cityUsers:
-        endpoint: ${bpdts-test-app.url}/city/{cityname}/users
-    users:
-        endpoint: ${bpdts-test-app.url}/users
-    user:
-        endpoint: ${bpdts-test-app.url}/users/userid}
-    city:
-        latitude: 51.507361
-        longitude: -0.127750
+#bpdts-test-app:
+#    url: https://bpdts-test-app.herokuapp.com/
+#    cityUsers:
+#        endpoint: ${bpdts-test-app.url}/city/{cityname}/users
+#    users:
+#        endpoint: ${bpdts-test-app.url}/users
+#    user:
+#        endpoint: ${bpdts-test-app.url}/users/userid}
+#    city:
+#        latitude: 51.507361
+#        longitude: -0.127750
 
 userdata:
     url: https://bpdts-test-app.herokuapp.com
     cityName: London
+    distance: 50
     city:
         latitude: 51.507361
         longitude: -0.127750

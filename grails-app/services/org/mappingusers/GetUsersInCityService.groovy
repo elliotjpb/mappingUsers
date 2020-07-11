@@ -12,10 +12,9 @@ import io.micronaut.http.client.HttpClient
 import io.micronaut.http.uri.UriBuilder
 
 @Transactional
-class MappingUsersService implements GrailsConfigurationAware {
+class GetUsersInCityService implements GrailsConfigurationAware {
 
     String cityName
-    String baseUrl
     HttpClient client
 
     @Override
@@ -37,11 +36,14 @@ class MappingUsersService implements GrailsConfigurationAware {
         System.out.println("The request: " + request)
         HttpResponse<String> resp = client.toBlocking().exchange(request, String)
         String json = resp.body()
-        System.out.println("Result of JSON: " + json)
         ObjectMapper objectMapper = new ObjectMapper()
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
         List<GUser> gSearchResult = objectMapper.readValue(json, new TypeReference<List<GUser>>(){})
-        System.out.println("Array: " + gSearchResult.get(0).id + " Size: " + gSearchResult.size())
+
+        for (GUser g : gSearchResult) {
+            System.out.println("Users in London: " + g.first_name + " " + g.last_name + " " + g.latitude + ", " + g.longitude)
+        }
+
     }
 
     URI usersInCityUri(String cityName) {

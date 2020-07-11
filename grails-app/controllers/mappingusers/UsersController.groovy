@@ -2,16 +2,19 @@ package mappingusers
 
 
 import org.mappingusers.GUser
-import org.mappingusers.MappingUsersService
+import org.mappingusers.GetUsersWithinDistanceService
+import org.mappingusers.GetUsersInCityService
 
 class UsersController {
 
-    MappingUsersService mappingUsersService
+    GetUsersInCityService getUsersInCityService
+    GetUsersWithinDistanceService getUsersWithinDistanceService
 
     def index() {
-        List<GUser> user = mappingUsersService.user()
+        List<GUser> user = getUsersInCityService.user()
         respond([user: user])
-        //System.out.println(user.getFirstName() + " " + user.getLastName() + " " + user.getEmail())
-        //[user: user]
+
+        List<GUser> all = getUsersWithinDistanceService.allUsers()
+        respond([all: all])
     }
 }
