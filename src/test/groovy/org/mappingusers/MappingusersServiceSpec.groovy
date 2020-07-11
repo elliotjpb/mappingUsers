@@ -1,10 +1,9 @@
-package mappingusers
+package org.mappingusers
 
 import grails.testing.services.ServiceUnitTest
-import org.mappingusers.UserdataService
 import spock.lang.Specification
 
-class UserdataServiceSpec extends Specification implements ServiceUnitTest<UserdataService>{
+class MappingUsersServiceSpec extends Specification implements ServiceUnitTest<MappingUsersService>{
 
     def setup() {
     }
@@ -14,6 +13,6 @@ class UserdataServiceSpec extends Specification implements ServiceUnitTest<Userd
 
     void "test something"() {
         expect:"fix me"
-            true == true
+            true == false
     }
 }

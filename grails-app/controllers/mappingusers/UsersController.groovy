@@ -1,15 +1,17 @@
 package mappingusers
 
-import org.mappingusers.UserdataService
-import org.userdata.User
+
+import org.mappingusers.GUser
+import org.mappingusers.MappingUsersService
 
 class UsersController {
 
-    UserdataService userdataService
+    MappingUsersService mappingUsersService
 
     def index() {
-        User user = userdataService.user()
-        System.out.println([user: user])
-        [user: user]
+        List<GUser> user = mappingUsersService.user()
+        respond([user: user])
+        //System.out.println(user.getFirstName() + " " + user.getLastName() + " " + user.getEmail())
+        //[user: user]
     }
 }
