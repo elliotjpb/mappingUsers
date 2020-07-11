@@ -3,7 +3,7 @@ package org.mappingusers
 import com.fasterxml.jackson.annotation.JsonProperty
 import groovy.transform.CompileStatic
 @CompileStatic
-class GUser {
+class User {
     Long id
     String first_name
     String last_name

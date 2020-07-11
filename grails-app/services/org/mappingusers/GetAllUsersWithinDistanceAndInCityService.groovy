@@ -9,10 +9,10 @@ class GetAllUsersWithinDistanceAndInCityService {
     GetUsersInCityService getUsersInCityService
     GetUsersWithinDistanceService getUsersWithinDistanceService
 
-    List<GUser> getInCityAndWithinDistance() {
-        List<GUser> usersInCity = getUsersInCityService.user()
-        List<GUser> usersWithinDistance = getUsersWithinDistanceService.allUsers()
-        final List<GUser> mergedLists = new ListUtils().union(usersInCity, usersWithinDistance)
+    List<User> getInCityAndWithinDistance() {
+        List<User> usersInCity = getUsersInCityService.user()
+        List<User> usersWithinDistance = getUsersWithinDistanceService.allUsers()
+        final List<User> mergedLists = new ListUtils().union(usersInCity, usersWithinDistance)
         return mergedLists
     }
 }

@@ -36,21 +36,21 @@ class GetUsersWithinDistanceService implements GrailsConfigurationAware {
         uriBuilder.build()
     }
 
-    List<GUser> allUsers() {
+    List<User> allUsers() {
         HttpRequest request = HttpRequest.GET(usersWithinDistanceUri())
         HttpResponse<String> resp = client.toBlocking().exchange(request, String)
         String json = resp.body()
         ObjectMapper objectMapper = new ObjectMapper()
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-        List<GUser> allUsers = objectMapper.readValue(json, new TypeReference<List<GUser>>(){})
+        List<User> allUsers = objectMapper.readValue(json, new TypeReference<List<User>>(){})
         getUsersWithinDistance(allUsers)
     }
 
-    List<GUser> getUsersWithinDistance(List<GUser> allUsers) {
+    List<User> getUsersWithinDistance(List<User> allUsers) {
 
-        List<GUser> withinDistance = new ArrayList<>()
+        List<User> withinDistance = new ArrayList<>()
 
-        for (GUser g : allUsers) {
+        for (User g : allUsers) {
             if (harversineDistance(centralLat, centralLong, g.latitude, g.longitude, distance)) {
                 withinDistance.add(g)
             }
