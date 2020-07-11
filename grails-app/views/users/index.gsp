@@ -1,13 +1,12 @@
 <html>
 <head>
-    <title>users</title>
-    <meta name="layout" content="main" />
+    <title>Results</title>
+    <asset:stylesheet src="main.css.css"/>
 </head>
 <body>
 <div id="content" role="main">
     <section class="row colset-2-its">
-%{--        <g:render template="/data/currentdata"--}%
-%{--                  model="[user: user]"/>--}%
+    <p>${aggregateUsers}</p>
     </section>
 </div>
 </body>

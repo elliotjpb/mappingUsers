@@ -33,17 +33,13 @@ class GetUsersInCityService implements GrailsConfigurationAware {
 
     List<GUser> getUsersInCity(String cityName) {
         HttpRequest request = HttpRequest.GET(usersInCityUri(cityName))
-        System.out.println("The request: " + request)
         HttpResponse<String> resp = client.toBlocking().exchange(request, String)
         String json = resp.body()
         ObjectMapper objectMapper = new ObjectMapper()
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
         List<GUser> gSearchResult = objectMapper.readValue(json, new TypeReference<List<GUser>>(){})
 
-        for (GUser g : gSearchResult) {
-            System.out.println("Users in London: " + g.first_name + " " + g.last_name + " " + g.latitude + ", " + g.longitude)
-        }
-
+        return gSearchResult
     }
 
     URI usersInCityUri(String cityName) {

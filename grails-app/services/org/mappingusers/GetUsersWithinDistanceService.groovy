@@ -56,10 +56,6 @@ class GetUsersWithinDistanceService implements GrailsConfigurationAware {
             }
         }
 
-        for (GUser i : withinDistance) {
-            System.out.println("Users within distance of London: " + i.first_name + " " + i.last_name + " " + i.latitude + ", " + i.longitude)
-        }
-
         return withinDistance
     }
 

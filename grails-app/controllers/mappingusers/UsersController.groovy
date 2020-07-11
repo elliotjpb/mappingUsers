@@ -1,20 +1,16 @@
 package mappingusers
 
-
+import groovy.json.JsonBuilder
 import org.mappingusers.GUser
-import org.mappingusers.GetUsersWithinDistanceService
-import org.mappingusers.GetUsersInCityService
+import org.mappingusers.GetAllUsersWithinDistanceAndInCityService
 
 class UsersController {
 
-    GetUsersInCityService getUsersInCityService
-    GetUsersWithinDistanceService getUsersWithinDistanceService
+    GetAllUsersWithinDistanceAndInCityService getAllUsersWithinDistanceAndInCityService
 
     def index() {
-        List<GUser> user = getUsersInCityService.user()
-        respond([user: user])
-
-        List<GUser> all = getUsersWithinDistanceService.allUsers()
-        respond([all: all])
+        List<GUser> aggregateUsers = getAllUsersWithinDistanceAndInCityService.getInCityAndWithinDistance()
+        System.out.println("aggregateUsers: " + new JsonBuilder( aggregateUsers ).toPrettyString())
+        render(view: "index", model: [aggregateUsers: new JsonBuilder( aggregateUsers ).toPrettyString()])
     }
 }
