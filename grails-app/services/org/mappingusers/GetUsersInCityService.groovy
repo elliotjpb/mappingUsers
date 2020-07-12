@@ -19,8 +19,8 @@ class GetUsersInCityService implements GrailsConfigurationAware {
 
     @Override
     void setConfiguration(Config co) {
-        setupHttpClient(co.getProperty('userdata.url', String))
-        cityName = co.getProperty('userdata.cityName', String)
+        setupHttpClient(co.getProperty('bpdts-test-app.url', String))
+        cityName = co.getProperty('bpdts-test-app.cityName', String)
     }
 
     void setupHttpClient(String url) {
@@ -35,6 +35,7 @@ class GetUsersInCityService implements GrailsConfigurationAware {
         HttpRequest request = HttpRequest.GET(usersInCityUri(cityName))
         HttpResponse<String> resp = client.toBlocking().exchange(request, String)
         String json = resp.body()
+        System.out.println(json)
         ObjectMapper objectMapper = new ObjectMapper()
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
         List<User> gSearchResult = objectMapper.readValue(json, new TypeReference<List<User>>(){})

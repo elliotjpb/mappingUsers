@@ -21,10 +21,10 @@ class GetUsersWithinDistanceService implements GrailsConfigurationAware {
 
     @Override
     void setConfiguration(Config co) {
-        setupHttpClient(co.getProperty('userdata.url', String))
-        this.centralLat = Double.parseDouble(co.getProperty('userdata.city.latitude'))
-        this.centralLong = Double.parseDouble(co.getProperty('userdata.city.longitude'))
-        this.distance = Double.parseDouble(co.getProperty('userdata.distance'))
+        setupHttpClient(co.getProperty('bpdts-test-app.url', String))
+        this.centralLat = Double.parseDouble(co.getProperty('bpdts-test-app.city.latitude'))
+        this.centralLong = Double.parseDouble(co.getProperty('bpdts-test-app.city.longitude'))
+        this.distance = Double.parseDouble(co.getProperty('bpdts-test-app.distance'))
     }
 
     void setupHttpClient(String url) {

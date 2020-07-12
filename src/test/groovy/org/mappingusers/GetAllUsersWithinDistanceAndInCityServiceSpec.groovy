@@ -3,7 +3,7 @@ package org.mappingusers
 import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 
-class GetUsersWithinDistanceServiceSpec extends Specification implements ServiceUnitTest<GetUsersWithinDistanceService>{
+class GetAllUsersWithinDistanceAndInCityServiceSpec extends Specification implements ServiceUnitTest<GetAllUsersWithinDistanceAndInCityService>{
 
     def setup() {
     }
