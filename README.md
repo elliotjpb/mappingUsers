@@ -6,7 +6,7 @@ It returns users who are listed as either living in London, or whose current coo
 
 To get all users who are living in London  `https://bpdts-test-app.herokuapp.com/city/London/users`
 
-For the users that are within 50 miles of London all users are requested through `https://bpdts-test-app.herokuapp.com/users` then using Haversine formula a subset of users is found where their latatuide and longitude are within 50 miles of London.
+For the users that are within 50 miles of London all users are requested through `https://bpdts-test-app.herokuapp.com/users` then using Haversine formula a subset of users is found where their latitude and longitude are within 50 miles of London.
 
 ## Software
 
