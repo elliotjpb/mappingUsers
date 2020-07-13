@@ -9,6 +9,7 @@ import grails.gorm.transactions.Transactional
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.client.HttpClient
+import io.micronaut.http.client.exceptions.HttpClientResponseException
 import io.micronaut.http.uri.UriBuilder
 
 @Transactional
@@ -31,16 +32,26 @@ class GetUsersInCityService implements GrailsConfigurationAware {
         getUsersInCity(cityName)
     }
 
+    /**
+     * Performs get request /city/{bpdts-test-app.cityName}/users to get all users with cityName as their city
+     * @param cityName
+     * @return A List of type User
+     */
     List<User> getUsersInCity(String cityName) {
-        HttpRequest request = HttpRequest.GET(usersInCityUri(cityName))
-        HttpResponse<String> resp = client.toBlocking().exchange(request, String)
-        String json = resp.body()
-        System.out.println(json)
-        ObjectMapper objectMapper = new ObjectMapper()
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-        List<User> usersInCityResult = objectMapper.readValue(json, new TypeReference<List<User>>(){})
+        try {
+            HttpRequest request = HttpRequest.GET(usersInCityUri(cityName))
+            HttpResponse<String> resp = client.toBlocking().exchange(request, String)
+            String json = resp.body()
+            System.out.println(json)
+            ObjectMapper objectMapper = new ObjectMapper()
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+            List<User> usersInCityResult = objectMapper.readValue(json, new TypeReference<List<User>>(){})
+            return usersInCityResult
 
-        return usersInCityResult
+        } catch (HttpClientResponseException e){
+            return null
+        }
+
     }
 
     URI usersInCityUri(String cityName) {

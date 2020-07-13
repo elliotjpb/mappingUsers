@@ -9,6 +9,7 @@ import grails.gorm.transactions.Transactional
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.client.HttpClient
+import io.micronaut.http.client.exceptions.HttpClientResponseException
 import io.micronaut.http.uri.UriBuilder
 
 @Transactional
@@ -36,16 +37,32 @@ class GetUsersWithinDistanceService implements GrailsConfigurationAware {
         uriBuilder.build()
     }
 
+    /**
+     * Performs get request /users
+     * @return The list of users within distance of city
+     */
+
     List<User> allUsers() {
-        HttpRequest request = HttpRequest.GET(usersWithinDistanceUri())
-        HttpResponse<String> resp = client.toBlocking().exchange(request, String)
-        String json = resp.body()
-        ObjectMapper objectMapper = new ObjectMapper()
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-        List<User> allUsers = objectMapper.readValue(json, new TypeReference<List<User>>(){})
-        getUsersWithinDistance(allUsers)
+        try {
+            HttpRequest request = HttpRequest.GET(usersWithinDistanceUri())
+            HttpResponse<String> resp = client.toBlocking().exchange(request, String)
+            String json = resp.body()
+            ObjectMapper objectMapper = new ObjectMapper()
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+            List<User> allUsers = objectMapper.readValue(json, new TypeReference<List<User>>(){})
+            getUsersWithinDistance(allUsers)
+
+        } catch (HttpClientResponseException e){
+            return null
+        }
+
     }
 
+    /**
+     *
+     * @param allUsers Takes in all users from request
+     * @return sub-set of users with users currently within 50 miles of London
+     */
     List<User> getUsersWithinDistance(List<User> allUsers) {
 
         List<User> withinDistance = new ArrayList<>()
@@ -55,11 +72,20 @@ class GetUsersWithinDistanceService implements GrailsConfigurationAware {
                 withinDistance.add(g)
             }
         }
-
         return withinDistance
     }
 
 
+    /**
+     * Haversine formula - https://rosettacode.org/wiki/Haversine_formula
+     * Calculates distances from two points on a sphere from their longitudes and latitudes.
+     * @param centralLat - centre of circle {'bpdts-test-app.city.latitude'}
+     * @param centralLong -centre of circle {'bpdts-test-app.city.longitude'}
+     * @param pointLat - lat from data in object
+     * @param pointLong - long from data in object
+     * @param distance - {'bpdts-test-app.distance'}
+     * @return boolean - if lat and long are within the distance
+     */
 
     boolean harversineDistance(double centralLat, double centralLong, double pointLat, double pointLong, double distance) {
 

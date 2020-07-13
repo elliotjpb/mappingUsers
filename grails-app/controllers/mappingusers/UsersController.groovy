@@ -8,6 +8,7 @@ class UsersController {
 
     GetAllUsersWithinDistanceAndInCityService getAllUsersWithinDistanceAndInCityService
 
+    //API call
     def index() {
         List<User> aggregateUsers = getAllUsersWithinDistanceAndInCityService.getInCityAndWithinDistance()
         System.out.println("aggregateUsers: " + new JsonBuilder( aggregateUsers ).toPrettyString())

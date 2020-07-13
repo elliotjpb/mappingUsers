@@ -10,9 +10,4 @@ class GetAllUsersWithinDistanceAndInCityServiceSpec extends Specification implem
 
     def cleanup() {
     }
-
-//    void "test something"() {
-//        expect:"fix me"
-//            true == false
-//    }
 }
