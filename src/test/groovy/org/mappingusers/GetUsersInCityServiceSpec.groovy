@@ -12,7 +12,15 @@ class GetUsersInCityServiceSpec extends Specification implements ServiceUnitTest
 
     def "A list of User objects is created from a JSON Payload"() {
 
-        String bodyString = "{\"id\": 135, \"first_name\": \"Mechelle\", \"last_name\": \"Boam\", \"email\": \"mboam3q@thetimes.co.uk\", \"ip_address\": \"113.71.242.187\", \"latitude\": -6.5115909, \"longitude\": 105.652983}"
+        String bodyJson = "{" +
+                "\"id\": 135, " +
+                "\"first_name\": \"Mechelle\", " +
+                "\"last_name\": \"Boam\", " +
+                "\"email\": \"mboam3q@thetimes.co.uk\", " +
+                "\"ip_address\": \"113.71.242.187\", " +
+                "\"latitude\": -6.5115909, " +
+                "\"longitude\": 105.652983" +
+                "}"
 
         given:
         ErsatzServer ersatz = new ErsatzServer()
@@ -22,7 +30,7 @@ class GetUsersInCityServiceSpec extends Specification implements ServiceUnitTest
                 responder {
                     encoder(ContentType.APPLICATION_JSON, Map, Encoders.json) // <1>
                     code(200)
-                    body([ bodyString ], ContentType.APPLICATION_JSON)
+                    body([ bodyJson ], ContentType.APPLICATION_JSON)
                 }
             }
         }
