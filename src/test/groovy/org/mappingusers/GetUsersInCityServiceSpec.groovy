@@ -10,6 +10,7 @@ import spock.lang.Specification
 @Integration
 class GetUsersInCityServiceSpec extends Specification implements ServiceUnitTest<GetUsersInCityService>{
 
+    //Using a mock server to test that JSON object is parsed correctly and mapped to the User class
     def "A list of User objects is created from a JSON Payload"() {
 
         String bodyJson = "{" +
