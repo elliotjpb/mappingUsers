@@ -8,6 +8,8 @@ To get all users who are living in London  `https://bpdts-test-app.herokuapp.com
 
 For the users that are within 50 miles of London all users are requested through `https://bpdts-test-app.herokuapp.com/users` then using Haversine formula a subset of users is found where their latitude and longitude are within 50 miles of London.
 
+Both sets of users are then combined for the given response.
+
 ## Software
 
 The API is created using Grails which uses the Groovy programming language.
