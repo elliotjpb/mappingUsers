@@ -12,7 +12,7 @@ For the users that are within 50 miles of London all users are requested through
 
 The API is created using Grails which uses the Groovy programming language.
 
-App and tests can be run in an IDE that supports Grails such as Intellij 
+App and tests can be run from an IDE that supports Grails such as Intellij 
 
 Alternatively you can install and run through the command line. 
 
@@ -24,14 +24,14 @@ Then install the latest stable Grails:
 
 `$ sdk install grails`
 
-Confirm grails install
+Confirm Grails install
 
 `$ grails -version`
 
 To run app:
 
-`grails run-app`
+`./gradlew bootrun`
 
 To run tests:
 
-`grails test-app`
+`./gradlew test`
